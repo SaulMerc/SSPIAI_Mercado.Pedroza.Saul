@@ -1,1 +1,1 @@
-# SSPIAI_Mercado.Pedro.Saul
+# Seminario de Solución de Problemas de Inteligencia Artificial I
