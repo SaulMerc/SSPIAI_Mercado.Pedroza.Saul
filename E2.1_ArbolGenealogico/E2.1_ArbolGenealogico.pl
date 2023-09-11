@@ -14,34 +14,73 @@ hombre(juanJr).
 
 %Bisabuelos
 hombre(marcos).
-
+hombre(lucio).
+hombre(maximino).
+hombre(pioquinto).
 %Abuelos
 hombre(petronilo).
-hombre(jose).
+hombre(pedro).
 
 %Tios abuelos
-
+hombre(gilberto).
+hombre(guadalupeR).
+hombre(bernardino).
+hombre(ramon).
 
 %Tios
 hombre(juan).
+hombre(juan).
+hombre(leopoldo).
+hombre(jose_de_jesus).
+hombre(salvador_P).
+hombre(alfredo).
+hombre(fernando).
+hombre(arturo).
+hombre(marcosM).
+hombre(sergio).
+hombre(jose).
+hombre(juan_manuel).
+hombre(salvadorM).
 
 %Tios politicos
 hombre(trinidad).
+hombre(antonio).
+hombre(gregorio).
+hombre(rosario).
+hombre(daniel).
+hombre(bruno).
 
 %Bisabuelas
 mujer(paula).
+mujer(donaciana).
+mujer(carmela).
+mujer(genobeba).
 %Abuela
 mujer(florencia).
+mujer(lorenza).
 
 %Tias abuelas
 mujer(margarita).
 mujer(matilde).
+mujer(alejandra).
+mujer(mariana).
 
 %Tias
 mujer(martina).
+mujer(guadalupeM).
+mujer(consuelo).
 
 %Tias políticas
 mujer(josefina).
+mujer(alicia).
+mujer(carmela).
+mujer(mariaC).
+mujer(maria_asuncion).
+mujer(maria_carmen).
+mujer(norma).
+mujer(micaela).
+mujer(socorro).
+mujer(berta).
 
 % Mamá
 mujer(yolanda).
@@ -62,14 +101,64 @@ progenitor(marcos, margarita).
 progenitor(paula, margarita).
 progenitor(marcos, matilde).
 progenitor(paula, matilde).
-%Abuelo materno progenitor
+%Abuelos maternos progenitor
 progenitor(petronilo,yolanda).
 progenitor(petronilo,juan).
 progenitor(petronilo,martina).
+progenitor(petronilo,aurelia).
+progenitor(petronilo,virginia).
+progenitor(petronilo,maria_de_jesus).
+progenitor(petronilo,leopoldo).
+progenitor(petronilo,jose_de_jesus).
+progenitor(petronilo,salvador_P).
+progenitor(petronilo,alfredo).
+progenitor(petronilo,fernando).
+progenitor(petronilo,arturo).
+progenitor(petronilo,marcosM).
+progenitor(petronilo,sergio).
 
-%Abuelo paterno progenitor
-progenitor(jose,ignacio).
-progenitor(florencia,ignacio).
+progenitor(florencia,yolanda).
+progenitor(florencia,juan).
+progenitor(florencia,martina).
+progenitor(florencia,aurelia).
+progenitor(florencia,virginia).
+progenitor(florencia,maria_de_jesus).
+progenitor(florencia,leopoldo).
+progenitor(florencia,jose_de_jesus).
+progenitor(florencia,salvador_P).
+progenitor(florencia,alfredo).
+progenitor(florencia,fernando).
+progenitor(florencia,arturo).
+progenitor(florencia,marcosM).
+progenitor(florencia,sergio).
+
+%Bisabuelos paternos
+progenitor(genobeba,pedro).
+progenitor(maximino,pedro).
+progenitor(genobeba,ramon).
+progenitor(maximino,ramon).
+progenitor(genobeba,alejandra).
+progenitor(maximino,alejandra).
+
+progenitor(pioquinto,lorenza).
+progenitor(carmela,lorenza).
+progenitor(pioquinto,bernardino).
+progenitor(carmela,bernardino).
+progenitor(pioquinto,mariana).
+progenitor(carmela,mariana).
+%Abuelos paternos progenitor
+progenitor(pedro,ignacio).
+progenitor(lorenza,ignacio).
+progenitor(pedro,guadalupeM).
+progenitor(lorenza,guadalupeM).
+progenitor(pedro,consuelo).
+progenitor(lorenza,consuelo).
+progenitor(pedro,jose).
+progenitor(lorenza,jose).
+progenitor(pedro,juan_manuel).
+progenitor(lorenza,juan_manuel).
+progenitor(pedro,salvadorM).
+progenitor(lorenza,salvadorM).
 %Papás
 progenitor(ignacio,carlos).
 progenitor(ignacio,oscar).
@@ -99,6 +188,21 @@ progenitor(josefina,maria).
 pareja(ignacio,yolanda).
 pareja(trinidad,martina).
 pareja(juan,josefina).
+pareja(juan_manuel,alicia).
+pareja(jose,mariaC).
+pareja(salvadorM,carmela).
+pareja(guadalupeM,antonio).
+pareja(consuelo,gregorio).
+pareja(leopoldo,maria_asuncion).
+pareja(virginia,rosario).
+pareja(maria_de_jesus,daniel).
+pareja(jose_de_jesus,maria_carmen).
+pareja(salvador_P,rosa).
+pareja(alfredo,norma).
+pareja(fernando,micaela).
+pareja(sergio,socorro).
+pareja(aurelia,bruno).
+pareja(arturo,berta).
 
 
 
