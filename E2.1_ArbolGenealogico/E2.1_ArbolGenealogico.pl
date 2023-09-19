@@ -29,7 +29,6 @@ hombre(ramon).
 
 %Tios
 hombre(juan).
-hombre(juan).
 hombre(leopoldo).
 hombre(jose_de_jesus).
 hombre(salvador_P).
@@ -204,7 +203,8 @@ pareja(sergio,socorro).
 pareja(aurelia,bruno).
 pareja(arturo,berta).
 
-
+%Definir ancestro
+ancestro(A,D) :- progenitor(A,T), ancestro(T,D).
 
 padre(P,H) :- progenitor(P,H), hombre(P).
 madre(M,H) :- progenitor(M,H) , mujer(M).
