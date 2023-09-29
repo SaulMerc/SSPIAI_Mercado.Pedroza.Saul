@@ -20,6 +20,7 @@ animales(carnivoro,
 animales(insectivoro,
     [rana,camaleon]
 ).
+
 %insertar
 insertar(E,L,Lr):- Lr = [E|L].
 insertar1(E,L,[E|L]).
