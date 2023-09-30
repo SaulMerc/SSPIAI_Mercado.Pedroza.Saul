@@ -33,18 +33,19 @@ agregar(E,[H|T],[H|L]) :-agregar(E,T,L).
 longitud([], 0).
 longitud([_|T], L) :- longitud(T,L1), L is L1 + 1.
 
-
 %buscar
 buscar(B,[B|_]).
 buscar(B,[_|T]):- buscar(B,T).
 
 %Concatenar
 concat([], L, L).
-concat([H|T], L, [H,Result]):- concat(T,L,Result).
-%REmover
+concat([H|T1], L2, [H,Result]):- concat(T1,L2,Result).
+
+%Remover
 remover(_,[],[]).
 remover(R,[R|T],T2):- remover(R,T,T2).
 remover(R,[H|T],[H|T2]):- H\=R , remover(R,T,T2).
+
 %Remover primer valor
 remover1(_,[],[]).
 remover1(R,[R|T],T):- !.
