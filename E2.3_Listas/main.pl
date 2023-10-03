@@ -25,7 +25,7 @@ main :-
     accion(5) :- longitud,main.
     accion(6) :- ordenar,main.
     accion(7) :- busqueda,main.
-    accion(8) :- !.
+    accion(_) :- !.
 
     %Métodos del menú
     %%Agregado%%
