@@ -67,9 +67,39 @@ imp_saltoP(N1,N2,P):- write(N1), write('->'), write(P) ,write('->'), write(N2),n
 caminoP(O,D,P):- g3(O,D,P), imp_saltoP(O,D,P), !.
 caminoP(O,D,P):- g3(O,Nt,P1), imp_saltoP(O,Nt,P1), caminoP(Nt,D,P2), P is P1 + P2, !.
 
-%Grafos con listas
+%Grafos con listas no dirigido
 grafoLista(gnn,[a-i,a-b,a-d,b-c,b-e,d-i,d-e,e-d,e-f,m-m]).
+%Grafos con listas dirigido
+%grafoLista(gdn,[a>i,a>b,a>d,b>c,b>e,d>i,d>e,e>d,e>f]).
 
-vecinos_Nd(N1,N2,G):- grafoLista(G,List),(member(N1-N2,List);member(N2-N1,List)).
+%Grafo de australia
+grafoLista(gAustralia,[ao-tn,ao-as,tn-q,tn-as,as-q,as-ngs,as-v,ngs-q,ngs-v,t-t]).
 
-grafoAustralia(gAustralia,[ao-tn,ao-as,tn-q,as-q,as-ngs,as-v,ngs-q,ngs-v,t-t]).
+%vecinos_d(N1,N2,G):- grafoLista(G,List),(member(N1>N2,List);member(N2>N1,List)).
+
+vecinos(N1,N2,G):- grafoLista(G,List),(member(N1-N2,List);member(N2-N1,List)).
+
+vertices(G,Ln):- 
+    %Devuelve una lista con los datos consultados
+    %bagof(N1,N2^vecinos(N1,N2,G),Ln).
+    %Devuelve yba lista con los datos consultados y los ordena
+    setof(N1,N2^vecinos(N1,N2,G),Ln).
+
+%Listar Nodos
+listar_N(G):- grafoLista(G,L), nodos(L,[]).
+nodos([],Lr):- sort(Lr, Lf), write(Lf).
+nodos([N1-N2|T],Lr):- L1 = [N1|Lr], L2 = [N2|L1],nodos(T,L2).
+
+%Imprimir Aristas
+imprimir_ar(G):- grafoLista(G,L), lista(L).
+lista([]).
+lista([H|T]):- write('\n\t Arista: '),write(H), nl, lista(T).
+
+%Recorrido
+recorrido(G,O,D,C):- recorrido_aux(G,O,[D],C).
+
+recorrido_aux(_,No,[No|C1],[No|C1]).
+recorrido_aux(G,Ax,[Dx|C1],C):-
+    vecinos(Nt,Dx,G),
+    not(member(Nt,[Dx|C1])),
+    recorrido_aux(G,Ax,[Nt,Dx|C1],C).
