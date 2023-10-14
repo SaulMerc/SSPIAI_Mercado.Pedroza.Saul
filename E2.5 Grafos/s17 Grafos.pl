@@ -73,7 +73,7 @@ grafoLista(gnn,[a-i,a-b,a-d,b-c,b-e,d-i,d-e,e-d,e-f,m-m]).
 %grafoLista(gdn,[a>i,a>b,a>d,b>c,b>e,d>i,d>e,e>d,e>f]).
 
 %Grafo de australia
-grafoLista(gAustralia,[ao-tn,ao-as,tn-q,tn-as,as-q,as-ngs,as-v,ngs-q,ngs-v,t-t]).
+grafoLista(australia,[ao-tn,ao-as,tn-q,tn-as,as-q,as-ngs,as-v,ngs-q,ngs-v,t-t]).
 
 %vecinos_d(N1,N2,G):- grafoLista(G,List),(member(N1>N2,List);member(N2>N1,List)).
 
@@ -91,9 +91,9 @@ nodos([],Lr):- sort(Lr, Lf), write(Lf).
 nodos([N1-N2|T],Lr):- L1 = [N1|Lr], L2 = [N2|L1],nodos(T,L2).
 
 %Imprimir Aristas
-imprimir_ar(G):- grafoLista(G,L), lista(L).
+imprimir_ar(G):- grafoLista(G,L), lista(L,1).
 lista([]).
-lista([H|T]):- write('\n\t Arista: '),write(H), nl, lista(T).
+lista([H|T],P):- write('\n\t Arista #'),write(P),write(": "),write(H), nl, P1 is P + 1,lista(T,P1).
 
 %Recorrido
 recorrido(G,O,D,C):- recorrido_aux(G,O,[D],C).
