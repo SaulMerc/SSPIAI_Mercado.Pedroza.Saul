@@ -1,3 +1,5 @@
+bd :- consult("SSPIAI_Mercado.Pedroza.Saul/E2.5 Grafos/grafos.pl").
+:- initialization(bd).
 %Grafos
 %
 g1(a,b).
@@ -68,7 +70,7 @@ caminoP(O,D,P):- g3(O,D,P), imp_saltoP(O,D,P), !.
 caminoP(O,D,P):- g3(O,Nt,P1), imp_saltoP(O,Nt,P1), caminoP(Nt,D,P2), P is P1 + P2, !.
 
 %Grafos con listas no dirigido
-grafoLista(gnn,[a-i,a-b,a-d,b-c,b-e,d-i,d-e,e-d,e-f,m-m]).
+grafoLista(gnn,[a-i,a-b,a-d,b-c,b-e,d-i,d-e,e-d,e-f,f-m,m-m]).
 %Grafos con listas dirigido
 %grafoLista(gdn,[a>i,a>b,a>d,b>c,b>e,d>i,d>e,e>d,e>f]).
 
@@ -103,3 +105,27 @@ recorrido_aux(G,Ax,[Dx|C1],C):-
     vecinos(Nt,Dx,G),
     not(member(Nt,[Dx|C1])),
     recorrido_aux(G,Ax,[Nt,Dx|C1],C).
+
+%%%Impresión de nodos de solo los adyacentes del nodo especificado%%%
+
+%%Crear un Grafo%%
+%grafo :- write('Nombre del grafo'), read(Ng), grafo(Cn,Ng).
+%grafo(Cn,Ng) :- grafo(Ng,_), write('Nodo 1: '), read(N1), nl,write('Nodo 2: '), read(N2), aGrafo(Ng,N1,N2).%Desea insertar mas aristas
+%aGrafo(Ng,N1,N2).%Agregar el grafo
+%Si no existe el grafo lo creo
+c_Grafo(N1,N2,Ngrafo):- \+grafo(Ngrafo,_), assert(grafo(Ngrafo,[])), a_Nodos(N1,N2,Ngrafo).
+
+%Si existe el grafo lo modifico
+a_Nodos(N1,N2,Ngrafo):- grafo(Ngrafo,Lista), insertar(N1-N2,Lista,ListaRes),retract(grafo(Ngrafo,Lista)), agregar_Bc(Ngrafo,ListaRes).
+
+%Comprobar que una conexión no exista para crearla
+c_Conexiones(N1,N2,Ngrafo):- grafo(Ngrafo,Lista), not(member(N1-N2,Lista)), 
+                        write('Agregando nueva conexion al grafo'),nl,a_Nodos(N1,N2,Ngrafo).
+c_Conexiones(N1,N2,Ngrafo):- grafo(Ngrafo,Lista), member(N1-N2,Lista), 
+                    write('Esta conexion ya han sido agregados').
+%Agregar a la base de conocimiento
+agregar_Bc(Ngrafo,Lista):- assert(grafo(Ngrafo,Lista)), guardar.
+insertar(E,L,Lr):- Lr = [E|L]. %Inserción en lista
+
+%Guardar los cambios en la base de conocimiento
+guardar :- tell('SSPIAI_Mercado.Pedroza.Saul/E2.5 Grafos/grafos.pl'), listing(grafo/2), told.
