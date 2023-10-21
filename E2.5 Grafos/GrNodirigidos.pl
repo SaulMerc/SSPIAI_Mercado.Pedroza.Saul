@@ -30,7 +30,7 @@ nodosAd(Nodo,[N1|T],Lr,G):- \+vecinos(Nodo,N1,G), L1 = [N1|T], remover(N1,L1,Lc)
 listar_Num_Nodos(G):- grafo(G,L), nodosN(L,[]).
 nodosN([],Lr):- sort(Lr, Lf), write(Lf), nl, longitud(Lf,Cant),%Impresión de los nodos y conteo de nodos
                 write('La cantidad de nodos existentes en este grafo son: '),write(Cant).
-nodosN([N1-N2|T],Lr):-  L1 = [N1|Lr], L2 = [N2|L1],nodosN(T,L2).
+nodosN([N1-N2|T],Lr):-  L1 = [N1|Lr], L2 = [N2|L1], nodosN(T,L2).
 
 %Imprimir Aristas del grafo
 imprimir_ar(G):- grafo(G,L), lista(L).
@@ -50,7 +50,7 @@ b_Nodo(Nb,Ngrafo):- grafo(Ngrafo,Lista), (member(Nb-_, Lista); member(_-Nb, List
 b_Nodo(Nb,Ngrafo):- grafo(Ngrafo,Lista), not(member(Nb-_, Lista); member(_-Nb, Lista)), 
                     write('El nodo '), write(Nb), write(' no se encuentra en el grafo').
 %Recorrido
-recorrido(G,O,D,C):- recorrido_aux(G,O,[D],C).
+recorrido(G,O,D,C):- recorrido_aux(G,O,[D],C),write(C).
 
 recorrido_aux(_,No,[No|C1],[No|C1]).
 recorrido_aux(G,Ax,[Dx|C1],C):-
@@ -96,9 +96,9 @@ pGrafos(G):-
     write("| 7.- Ver la cantidad de aristas"),nl,
     write("| 8.- Buscar un nodo"),nl,
     write("| 9.- Realizar recorrido"),nl,
-    write("| 10.- Conocer los camino hamiltonianos"),nl,
+    write("| 10.- Conocer los caminos hamiltonianos"),nl,
     write("| 11.- Conocer los caminos hamiltonianos a partir de un nodo"),nl,
-    write("| Cualquier otra letra para salir"),nl,
+    write("| 12.- Para salir"),nl,
     write("---------------------------------------------------------"),nl,
     read(AC),
     accion(AC,G).
@@ -106,23 +106,49 @@ pGrafos(G):-
     %Dirreccionamiento a las opciones
     accion(1,_) :- elegir.
     accion(2,G) :- comprobar(G),pGrafos(G).
-    accion(3,G) :- lNodos,pGrafos(G).
-    accion(4,G) :- cNodos,pGrafos(G).
-    accion(5,G) :- nAd,pGrafos(G).
-    accion(6,G) :- vAr,pGrafos(G).
-    accion(7,G) :- cAr,pGrafos(G).
-    accion(8,G) :- bNodo,pGrafos(G).
-    accion(9,G) :- recorrido,pGrafos(G).
-    accion(10,G) :- cHamil,pGrafos(G).
-    accion(11,G) :- cHamilO,pGrafos(G).
-    accion(_) :- !.
-
-elegir:- write('Con que grafo deseas trabajar: '),read(G), pGrafos(G).
+    accion(3,G) :- lNodos(G),pGrafos(G).
+    accion(4,G) :- cNodos(G),pGrafos(G).
+    accion(5,G) :- nAd(G),pGrafos(G).
+    accion(6,G) :- vAr(G),pGrafos(G).
+    accion(7,G) :- cAr(G),pGrafos(G).
+    accion(8,G) :- bNodo(G),pGrafos(G).
+    accion(9,G) :- recorrido(G,C),pGrafos(G).
+    accion(10,G) :- cHamil(G,C),pGrafos(G).
+    accion(11,G) :- cHamilO(G,C),pGrafos(G).
+    accion(12,G) :- !.
+%Seleccionar con  que nodo trabajar
+elegir:- write('Con que grafo deseas trabajar: '),read(G), pGrafos(G), nl.
 
 comprobar(G):- write('Ingresa el primer nodo: '), read(N1),nl,
-            write('Ingresa el segundo nodo: '), read(N2), c(N1,N2,G).
+            write('Ingresa el segundo nodo: '), read(N2), c(N1,N2,G), nl.
 comprobar(G):- write('Ingresa el primer nodo: '), read(N1),nl,
-            write('Ingresa el segundo nodo: '), read(N2), c(N1,N2,G).
-        
-c(N1,N2,G):- \+vecinos(N1,N2,G), write('Estos nodos no son vecinos'),nl.
-c(N1,N2,G):- vecinos(N1,N2,G), write('Estos nodos son vecinos'),nl.
+            write('Ingresa el segundo nodo: '), read(N2), c(N1,N2,G), nl.
+    %Comprobar adyacencias
+    c(N1,N2,G):- \+vecinos(N1,N2,G), write('Estos nodos no son vecinos'),nl.
+    c(N1,N2,G):- vecinos(N1,N2,G), write('Estos nodos son vecinos'),nl.
+
+%Listar nodos
+lNodos(G):- write('Los nodos existentes en el grafo de '),write(G), write(' son:'),nl, listar_N(G), nl.
+
+%Contar la cantidad de nodos
+cNodos(G):- listar_Num_Nodos(G), nl.
+
+%Comprobar nodos adyacentes
+nAd(G):- write('Ingresa nodo para buscar sus vecinos'), read(N1), nl, ad(N1,G), nl.
+    ad(N1,G):- b_Nodo(N1,G), nodos_adyacentes(N1,G), nl.
+    ad(N1,G):- \+b_Nodo(N1,G), nl.
+
+%Ver aristas
+vAr(G):- imprimir_ar(G), nl.
+%Contar aristas
+cAr(G):- imprimir_N_ar(G), nl.
+
+%Busqueda de un nodo existente
+bNodo(G):- write('Ingresa el nombre del nodo a buscar'), read(N1), nl, b_Nodo(N1,G), nl.
+%Realizar Recorrido en el grafo
+recorrido(G,C):- write('Ingresa nombre del nodo Origen: '), read(N1),nl,
+                write('Ingresa nombre del nodo Destino: '), read(N2), recorrido(G,N1,N2,C), nl.
+%Todos los caminos Hamiltonianos de un grafo
+cHamil(G,C):- write('Un camino hamiltoniano del grafo '), write(G), write(' es'), nl, hamiltoniano(G,C), nl.
+%Caminos hamiltonianos a partir de un nodo origen
+cHamilO(G,C):- write('Ingresa el nodo '), read(O), nl, hamiltoniano_O(G,O,C), nl.
