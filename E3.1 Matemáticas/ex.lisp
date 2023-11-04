@@ -44,7 +44,6 @@
     1)
 )
 
-
 ;3.2 listas y arboles
 
 (setf lista '(1 2 3 4 5))
