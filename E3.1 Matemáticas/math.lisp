@@ -11,3 +11,12 @@
     (princ "El valor de la hipotenusa es ")
     (write (sqrt ( + (* a a) (* b b) )) )
     )
+
+;Fórmula general
+(defun formCuad (a b c)
+        (let ((resul1 (/ (+ (- b) (sqrt (-(* b b)(* 4 a c)))) (* 2 a)))
+        )(format t "El primer resultado es: ~d" resul1))
+        (write-line "")
+        (let ((resul2 (/ (- (- b) (sqrt (-(* b b)(* 4 a c)))) (* 2 a))))
+        (format t "El segundo resultado es: ~d" resul2))
+)
