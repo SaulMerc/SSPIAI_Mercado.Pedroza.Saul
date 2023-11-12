@@ -6,7 +6,7 @@
 
 ;Listas Anidadas
 ;Estructura: (setf arbol '(raiz (izqR (izq der) rder(izq der))))
-(setf arbol '(i (d (e(f (m nil) b(c nil)) a) a(e (f (m nil) b(c nil)) b (e c)))))
+(setf arbol '(i (d (e(f (m nil) b(c nil)) a) a(e (f (m nil) b(c nil)) b ((e nil) (c nil))))))
 
 (write arbol)
 
@@ -22,3 +22,10 @@
 )
 
 (print-cons-tree pinturas)
+
+(defun preord (a)
+  (if (endp a)
+      nil
+      (append (postord (second (second a))) ;; Recorrer el subárbol izquierdo
+              (postord (first (second a)))   ;; Recorrer el subárbol derecho
+              (list (first a))))) 
