@@ -3,7 +3,7 @@
 (setf oleo '(la_noche_estrellada la_ronda_de_noche golconda nighthawks monalisa la_joven_de_la_perla))
 (setf acuarela '(puente_de_londres el_jardin_de_aves cocina_de_mujer_nativa_bahamas))
 (setq goauche '(el_nino_con_el_perro el_interior_del_viejo_burgtheater))
-
+(setq numeros '(1 2 3 4 5 6 7 8 9 20 30))
 
 ;cdr oleo -> la_ronda_de_noche golconda nighthawks monalisa la_joven_de_la_perla
 ;caddr oleo -> Golconda
@@ -49,7 +49,20 @@
         (format t "Lista actual: ~a~%" pinturas)))
 )
 
-;Pila - Push Pop
+;Eliminar como pila
 (defun pop-it (l)
 	(setf l (cdr l))
 )
+
+;Convertir valores de la lista a mayusculas
+(defun mayusculas (lista)
+    (mapcar #'string-upcase lista))
+
+;Ordenar lista de palabras
+(defun ordenar (lista)
+    (sort lista #'string<)
+)
+
+;Filtrar nomeros mayores al que se inserta
+(defun mayoresQue (lista valor)
+    (remove-if-not (lambda (x) (> x valor)) lista))
